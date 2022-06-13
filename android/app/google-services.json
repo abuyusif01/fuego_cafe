@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "844727063783",
+    "project_id": "fuego-cafe",
+    "storage_bucket": "fuego-cafe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844727063783:android:6c5b2e2bb323aa7c843e42",
+        "android_client_info": {
+          "package_name": "com.example.fuego_cafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844727063783-svk2olf2tebkmlre0d5ncgo5c3dknl52.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fuego_cafe",
+            "certificate_hash": "ade61c9efced488b50141e8b70f3d188983eda30"
+          }
+        },
+        {
+          "client_id": "844727063783-8moinvma4b9kfhi89hbuojg6iq93l21u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5HYoT7LY1zY7TX0TltA8Ytvrofqwt50c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "844727063783-8moinvma4b9kfhi89hbuojg6iq93l21u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
