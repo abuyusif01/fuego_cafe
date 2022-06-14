@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fuego_cafe/res/custom_colors.dart';
-import 'package:fuego_cafe/screens/sign_in_screen.dart';
+import 'package:fuego_cafe/screens/welcome_screen.dart';
 import 'package:fuego_cafe/utils/authentication.dart';
 
 class UserInfoScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   Route _routeToSignInScreen() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
-          const SignInScreen(),
+          const WelcomeScreen(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = const Offset(-1.0, 0.0);
         var end = Offset.zero;
@@ -49,10 +49,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.firebaseNavy,
+      backgroundColor: Colors.indigo,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: CustomColors.firebaseNavy,
+        backgroundColor: Colors.indigo,
       ),
       body: SafeArea(
         child: Padding(
@@ -138,6 +138,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                         ),
                       ),
                       onPressed: () async {
+                        //  print("image abu: " + _user.photoURL!);
                         setState(() {
                           _isSigningOut = true;
                         });

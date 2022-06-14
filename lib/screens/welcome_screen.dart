@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fuego_cafe/guest_page.dart';
+import 'package:fuego_cafe/res/custom_colors.dart';
+import 'package:fuego_cafe/screens/user_info_screen.dart';
+import 'package:fuego_cafe/utils/authentication.dart';
+import 'package:fuego_cafe/widgets/google_sign_in_button.dart';
 // import 'login_screen.dart';
 // import 'signup_screen.dart';
 
@@ -83,7 +88,14 @@ class WelcomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
-                        onPressed: () => {},
+                        onPressed: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const GuestPage(),
+                            ),
+                          )
+                        },
                         child: const Text(
                           'Log In as Guest',
                           style: TextStyle(
@@ -94,32 +106,23 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      height: 80,
-                      width: double.infinity,
-                      padding:
-                          const EdgeInsets.only(top: 25, left: 24, right: 24),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          primary: Colors.indigo,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
+                    FutureBuilder(
+                      future:
+                          Authentication.initializeFirebase(context: context),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text(snapshot.error.toString());
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.done) {
+                          return const GoogleSignInButton();
+                        }
+                        return const CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            CustomColors.firebaseOrange,
                           ),
-                        ),
-                        onPressed: () => {},
-                        // onPressed: () => Navigator.of(context)
-                        //     .pushNamed(SignupScreen.routeName),
-                        child: const Text(
-                          'Sign Using Google',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.lightBlue,
-                          ),
-                        ),
-                      ),
-                    ),
+                        );
+                      },
+                    )
                   ],
                 ),
               ),
@@ -130,3 +133,20 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 }
+
+
+  // FutureBuilder(
+  //               future: Authentication.initializeFirebase(context: context),
+  //               builder: (context, snapshot) {
+  //                 if (snapshot.hasError) {
+  //                   return Text(snapshot.error.toString());
+  //                 } else if (snapshot.connectionState == ConnectionState.done) {
+  //                   return const GoogleSignInButton();
+  //                 }
+  //                 return const CircularProgressIndicator(
+  //                   valueColor: AlwaysStoppedAnimation<Color>(
+  //                     CustomColors.firebaseOrange,
+  //                   ),
+  //                 );
+  //               },
+  //             )

@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:fuego_cafe/screens/sign_in_screen.dart';
 import 'package:fuego_cafe/screens/user_info_screen.dart';
-// import 'package:weatherapp/TabController.dart';
-// import 'package:weatherapp/screens/user_info_screen.dart';
 import 'package:fuego_cafe/utils/authentication.dart';
 
 class GoogleSignInButton extends StatefulWidget {
@@ -21,60 +18,52 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: _isSigningIn
-          ? const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-            )
-          : OutlinedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.white),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40),
+          ? Container(
+              height: 80,
+              width: 100,
+              padding: const EdgeInsets.only(top: 25, left: 24, right: 24),
+              child: const CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              ))
+          : Container(
+              height: 80,
+              width: double.infinity,
+              padding: const EdgeInsets.only(top: 25, left: 24, right: 24),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  primary: Colors.indigo,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
                   ),
                 ),
-              ),
-              onPressed: () async {
-                setState(() {
-                  _isSigningIn = true;
-                });
-                User? user =
-                    await Authentication.signInWithGoogle(context: context);
-
-                setState(() {
-                  _isSigningIn = false;
-                });
-
-                if (user != null) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => UserInfoScreen(user: user),
-                    ),
-                  );
-                }
-              },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
-                    Image(
-                      image: AssetImage("assets/google_logo.png"),
-                      height: 35.0,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        'Sign in with Google',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ],
+                child: const Text(
+                  'Sign Using Google',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.lightBlue,
+                  ),
                 ),
+                onPressed: () async {
+                  setState(() {
+                    _isSigningIn = true;
+                  });
+                  User? user =
+                      await Authentication.signInWithGoogle(context: context);
+
+                  setState(() {
+                    _isSigningIn = false;
+                  });
+
+                  if (user != null) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => UserInfoScreen(user: user),
+                      ),
+                    );
+                  }
+                },
               ),
             ),
     );
